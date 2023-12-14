@@ -1,0 +1,38 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-eb90b344.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-eb90b344.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "css": [
+      "assets/app-eb90b344.css"
+    ],
+    "dynamicImports": [
+      "resources/js/components/Main.vue",
+      "resources/js/components/Login.vue"
+    ],
+    "file": "assets/app-2c475d7e.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/components/Login.vue": {
+    "file": "assets/Login-b12d9e6c.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/components/Login.vue"
+  },
+  "resources/js/components/Main.vue": {
+    "file": "assets/Main-af07c267.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/components/Main.vue"
+  }
+}

@@ -1,0 +1,5 @@
+
+export const LS_STORAGE_PREFIX = '$-SPORT_PROJECT_LOCAL_STORAGE-';
+
+export const LS_USERS = LS_STORAGE_PREFIX + 'USERS';
+export const LS_TOKEN = LS_STORAGE_PREFIX + 'TOKEN';
