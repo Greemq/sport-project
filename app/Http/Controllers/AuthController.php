@@ -11,10 +11,9 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        Log::error($request->all());
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $token = $user->createToken();
+            $token = $user->createToken('sport-token');
             return response()->json([
                 'success' => true,
                 'data' => [
@@ -31,7 +30,14 @@ class AuthController extends Controller
         }
     }
 
-    public function getUserData()
+    public function logout()
+    {
+        Auth::user()->token()->revoke();
+
+        return response()->json(['success' => true, 'message' => 'Successfully logged out']);
+    }
+
+    public function userInfo()
     {
         return Auth::user();
     }

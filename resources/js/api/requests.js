@@ -1,24 +1,23 @@
 import client from "../api/index.js";
-import {LS_USERS, LS_TOKEN} from "../_types/index.js";
-import {setTokenToClient} from "../api/index.js";
 
 const requests = {
-    async login(data) {
-        return await client.post('/api/auth/login', data).then(res => {
-            this.setAuthorization(data.email, data.password, res.data.data.token);
+    fileUpload(data) {
+        return client.post('/api/file-upload', data,{headers: {'content-type': 'multipart/form-data'}}).then(res => res.data);
+    },
+    getNewsList() {
+        return client.get('/api/news').then(res => res.data);
+    },
+    getNewsItem(id) {
+        return client.get('/api/news/' + id).then(res => res.data);
+    },
+    createNewsItem(data) {
+        return client.post('/api/news', data).then(res => {
+            return res.data;
         });
-
     },
-    setAuthorization(email, password, token) {
-        const authdata = window.btoa(email + ':' + encodeURIComponent(password));
-
-        localStorage.setItem(LS_USERS, JSON.stringify(authdata));
-        localStorage.setItem(LS_TOKEN, token);
-
-        setTokenToClient(token);
-        store.commit(AUTH + RESET);
-
-    },
+    updateNewsItem(id, data) {
+        return client.post('/api/news/' + id, data).then(res => res.data);
+    }
 };
 
 export default requests;

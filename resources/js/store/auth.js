@@ -7,10 +7,15 @@ const auth = {
         token: localStorage.getItem(LS_TOKEN),
     }),
     mutations: {
-        [SET](state, {authorised = false, token = null}) {
-            state.authorized = authorised;
+        setAuth(state, token) {
+            state.authorized = true;
             state.token = token;
         },
+        removeAuth(state) {
+            state.authorized = false;
+            state.token = null;
+        }
+
     },
     actions: {},
     getters: {}

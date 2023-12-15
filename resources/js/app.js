@@ -5,8 +5,9 @@ import {createApp} from 'vue';
 import App from './App.vue';
 import router from "./router/index.js";
 import store from "./store/index.js";
-
-
+import InfiniteLoading from "v3-infinite-loading";
+import "v3-infinite-loading/lib/style.css";
+import dayjs from "dayjs";
 // app.use(router)
 // app.use(store)
 // app.config.devtools = true;
@@ -22,7 +23,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.use(store);
 app.use(router);
-
+app.component("infinite-loading", InfiniteLoading);
+app.config.globalProperties.$dayjs = dayjs
 
 app.mount('#app');
 
