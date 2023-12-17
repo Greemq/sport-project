@@ -4,7 +4,7 @@
             <div class="sm:w-full md:w-full lg:w-1/2">
                 <ui-input class="" v-model="item.title" :error="errors.title" :disabled="loading" label="Заголовок"
                           placeholder="Заголовок"/>
-                <ui-file-upload @fileUpload="setFile" v-model="item.img" :error="errors.img"/>
+                <ui-file-upload @fileUpload="setFile" v-model="item.img" :error="errors.img" :disabled="loading"/>
                 <div class="mt-3">
                     <label class="relative inline-flex items-center cursor-pointer mb-5">
                         <input type="checkbox" v-model="item.is_published" class="sr-only peer" :disabled="loading">
@@ -19,7 +19,8 @@
 
             </div>
             <div class="mt-3 w-full flex justify-center">
-                <button type="button" @click="$route.params.id?updateItem():saveItem()" :disabled="disabled"
+                <button type="button" @click="$route.params.id?updateItem():saveItem()" :disabled="loading"
+                        :class="{'cursor-not-allowed':loading}"
                         class="mt-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Сохранить
                 </button>

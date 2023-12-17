@@ -23,6 +23,6 @@ class News extends Model
 
     public function getThumbImageAttribute()
     {
-        return '';
+        return 'storage/news/thumb_' . basename($this->img);
     }
 }
