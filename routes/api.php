@@ -31,4 +31,5 @@ Route::middleware(['auth:api'])->group(function () {
 
 Route::middleware([])->prefix('public')->group(function () {
     Route::get('news', [\App\Http\Controllers\PublicController::class, 'newsList']);
+    Route::get('calendar-results', [\App\Http\Controllers\PublicController::class, 'getResults']);
 });
