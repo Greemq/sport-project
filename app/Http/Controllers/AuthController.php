@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -13,13 +12,12 @@ class AuthController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            $token = $user->createToken('sport-token');
+            $token = $user->createToken('admin-sport-token');
             return response()->json([
                 'success' => true,
                 'data' => [
                     'token' => $token->accessToken,
                     'user' => $user,
-                    'expires_at' => $token->token->expires_at->diffInSeconds(Carbon::now())
                 ]], 200);
         } else {
             return response()->json([

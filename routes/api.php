@@ -32,4 +32,9 @@ Route::middleware(['auth:api'])->group(function () {
 Route::middleware([])->prefix('public')->group(function () {
     Route::get('news', [\App\Http\Controllers\PublicController::class, 'newsList']);
     Route::get('calendar-results', [\App\Http\Controllers\PublicController::class, 'getResults']);
+    Route::post('register', [\App\Http\Controllers\PublicController::class, 'register']);
+    Route::middleware(['auth:api'])->group(function () {
+        Route::get('user-info', [\App\Http\Controllers\PublicController::class, 'userInfo']);
+    });
+
 });

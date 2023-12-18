@@ -29,7 +29,7 @@ export default defineConfig({
     // root: "src",
     publicDir: "./public",
     build: {
-        outDir: "./dist",
+        // outDir: "./dist",
         // rollupOptions: {
         //     output: {
         //         chunkFileNames: 'assets/js/[name]-[hash].js',

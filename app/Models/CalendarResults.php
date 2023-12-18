@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class CalendarResults extends Model
 {
@@ -32,5 +33,11 @@ class CalendarResults extends Model
         }
 
         return $query;
+    }
+
+    public function scopeOrder($query, $order)
+    {
+        Log::error($order);
+        return $query->orderBy('date_time','ASC');
     }
 }
