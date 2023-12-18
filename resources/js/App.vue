@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-gray-900" v-if="ready&&$store.state.user.user">
-        <sidebar v-if="$route.name!=='login'"/>
+    <div class="bg-gray-900" v-if="ready">
+        <sidebar v-if="authorized"/>
         <router-view class="min-h-screen"/>
     </div>
 

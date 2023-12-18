@@ -5,13 +5,13 @@ import calendarResultsRoutes from "@/router/calendarResultsRoutes.js";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        ...newsRoutes,
+        ...calendarResultsRoutes,
         {
             path: '/login',
             name: 'login',
             component: () => import('../components/Login.vue'),
         },
-        ...newsRoutes,
-        ...calendarResultsRoutes
 
     ]
 });
