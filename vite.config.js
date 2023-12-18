@@ -28,6 +28,11 @@ export default defineConfig({
     // }
     // root: "src",
     // publicDir: "./public",
+    resolve: {
+        alias: {
+            vue: "vue/dist/vue.esm-bundler.js",
+        }
+    },
     build: {
         // outDir: "./public",
         // rollupOptions: {
