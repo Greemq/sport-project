@@ -32,14 +32,15 @@ const authApi = {
         });
     },
     async logout(bool = true) {
+        removeTokenFromClient();
+        localStorage.removeItem(LS_USERS);
+        localStorage.removeItem(LS_TOKEN);
+        store.commit('removeAuth');
+        store.commit('deleteUser');
+        if (bool)
+            window.location.reload();
         return await client.post('/api/logout').then(() => {
-            removeTokenFromClient();
-            localStorage.removeItem(LS_USERS);
-            localStorage.removeItem(LS_TOKEN);
-            store.commit('removeAuth');
-            store.commit('deleteUser');
-            if (bool)
-                window.location.reload();
+
         });
     },
 };
