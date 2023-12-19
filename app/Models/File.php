@@ -17,4 +17,11 @@ class File extends Model
         'file'
     ];
 
+    public function scopeFilter($query, $filters)
+    {
+        if (isset($filters['type']))
+            $query->where('type', $filters['type']);
+        return $query;
+    }
+
 }

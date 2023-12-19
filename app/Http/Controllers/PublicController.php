@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalendarResults;
+use App\Models\File;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,5 +64,10 @@ class PublicController extends Controller
     public function userInfo()
     {
         return Auth::user();
+    }
+
+    public function getFiles(Request $request)
+    {
+        return File::filter($request->all())->get();
     }
 }

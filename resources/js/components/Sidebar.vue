@@ -169,22 +169,32 @@ export default {
                     name: 'files',
                     label: 'Файлы'
                 },
-                // {
-                //     name: 'news',
-                //     label: 'Результаты соревнований'
-                // },
-                // {
-                //     name: 'news',
-                //     label: 'Предстоящие события'
-                // },
-                // {
-                //     name: 'news',
-                //     label: 'Топ Видео'
-                // },
-                // {
-                //     name: 'news',
-                //     label: 'Фотогалерея'
-                // },
+
+                {
+                    name: 'news',
+                    label: 'Предстоящие события'
+                },
+                {
+                    name: 'news',
+                    label: 'Топ Видео'
+                },
+                {
+                    name: 'news',
+                    label: 'Фотогалерея'
+                },
+                {
+                    name: 'news',
+                    label: 'Пресс-релизы'
+                },
+                {
+                    name: 'news',
+                    label: 'Опрос'
+                },
+                {
+                    name: 'news',
+                    label: 'FAQ (Частые вопросы)'
+                },
+
 
             ],
             userName: null

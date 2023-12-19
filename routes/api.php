@@ -51,4 +51,6 @@ Route::middleware([])->prefix('public')->group(function () {
         Route::get('user-info', [\App\Http\Controllers\PublicController::class, 'userInfo']);
     });
 
+    Route::get('files',[\App\Http\Controllers\PublicController::class,'getFiles']);
+
 });
