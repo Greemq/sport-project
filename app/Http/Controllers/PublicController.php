@@ -70,14 +70,13 @@ class PublicController extends Controller
 
     public function getFiles(Request $request)
     {
-        if ($request->type == 2) {
-            $list = File::filter($request->all())->orderBy('date_time', 'DESC')->get();
 
+        $list = File::filter($request->all())->orderBy('date_time', 'DESC')->get();
+        if ($request->type == 2) {
             $list = $list->groupBy(function ($item) {
                 return \Carbon\Carbon::parse($item->date_time)->year;
             });
-        } else
-            $list = File::filter($request->all())->orderBy('date_time', 'DESC')->get();
+        }
         return $list;
     }
 
