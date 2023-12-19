@@ -2,7 +2,7 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div class=" flex justify-end">
-                <button type="button" @click="$router.push({name:'calendar_results_create'})"
+                <button type="button" @click="$router.push({name:'files_create'})"
                         class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Добавить
                 </button>
@@ -11,17 +11,14 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3 w-30">
-                            Дата
+                        <th scope="col" class="px-6 py-3">
+                            ФИО
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Название
+                            Регион
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Статус
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Спортсменов
+                            ID
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Действия
@@ -33,22 +30,19 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                         v-for="item in list" :key="'list_item_'+item.id">
                         <td class="px-6 py-4">
-                            {{ $dayjs(item.date_time).format('DD:M:YYYY HH:MM:ss') }}
+                            {{ item.fio }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ item.title }}
+                            {{ item.location }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ getStatus(item.status) }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ item.athlete_count }}
+                            {{ item.personal_id }}
                         </td>
                         <td class="px-6 py-4 w-10">
                             <div class="flex items-center justify-end">
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer h-full"
                                      aria-hidden="true"
-                                     @click="$router.push({name:'calendar_results_item',params:{id:item.id}})"
+                                     @click="$router.push({name:'athlete_item',params:{id:item.id}})"
                                      xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                                     <path
                                         d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
@@ -62,7 +56,7 @@
                     </tbody>
                 </table>
                 <div class="flex justify-center w-full h-15 mt-3 mb-3" style="width:100%">
-                    <infinite-loading @infinite="handleLoad" v-if="page!==last_page">
+                    <infinite-loading @infinite="handleLoad" v-if="page!==last_page&&!loading">
                         <template #spinner>
                             <div class="text-center">
                                 <div role="status">
@@ -91,13 +85,13 @@
 import requests from "@/api/requests.js";
 
 export default {
-    name: "CalendarResultsList",
+    name: "Athletes",
     data() {
         return {
-            list: [],
+            loading: false,
             page: 0,
             last_page: null,
-            loading: false
+            list: []
         };
     },
     methods: {
@@ -108,32 +102,13 @@ export default {
         getList() {
             this.loading = true;
             this.page += 1;
-            requests.getCalendarResultsList({page: this.page}).then(res => {
+            requests.getAthleteList({page: this.page}).then(res => {
                 this.list = this.list.concat(res.data);
                 this.last_page = res.last_page;
                 this.loading = false;
             });
-        },
-        getStatus(status) {
-            let res = '';
-            switch (status) {
-                case 1:
-                    res = 'Ожидается';
-                    break;
-                case 2:
-                    res = 'Проходит';
-                    break;
-                case 3:
-                    res = 'Отменен';
-                    break;
-                case 4:
-                    res = 'Завершен';
-                    break;
-            }
-            return res;
         }
-    },
-
+    }
 };
 </script>
 

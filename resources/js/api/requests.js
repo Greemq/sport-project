@@ -46,6 +46,21 @@ const requests = {
     updateFilesItem(id, data) {
         return client.post('/api/files/' + id + '/update', data).then(res => res.data);
     },
+    getAthleteList() {
+        return client.get('/api/athlete').then(res => res.data);
+    },
+    getAthleteItem(id) {
+        return client.get('/api/athlete/' + id).then(res => res.data);
+    },
+    createAthleteItem(data) {
+        return client.post('/api/athlete', data).then(res => {
+            return res.data;
+        });
+    },
+    updateAthleteItem(id, data) {
+        return client.post('/api/athlete/' + id + '/update', data).then(res => res.data);
+    },
+
 
 };
 

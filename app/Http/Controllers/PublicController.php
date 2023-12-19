@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PublicController extends Controller
 {
@@ -73,6 +74,7 @@ class PublicController extends Controller
     }
 
     public function athleteList(Request $request){
+        Log::error($request->all());
         return Athlete::filter($request)->paginate($request->paginate);
     }
 }

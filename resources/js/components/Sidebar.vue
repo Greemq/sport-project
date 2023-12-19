@@ -166,6 +166,10 @@ export default {
                     label: 'Календарь и результаты'
                 },
                 {
+                    name: 'athlete',
+                    label: 'Спортсмены'
+                },
+                {
                     name: 'files',
                     label: 'Файлы'
                 },

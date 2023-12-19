@@ -4,7 +4,7 @@
             <div class="sm:w-full md:w-full lg:w-1/2">
                 <ui-input class="" v-model="item.title" :error="errors.title" :disabled="loading" label="Заголовок"
                           placeholder="Заголовок"/>
-                <ui-date-picker label="label" :date="item.year"/>
+                <ui-date-picker label="Дата публикации" v-model="item.publish_date" :disabled="loading"/>
                 <ui-image-upload @fileUpload="setFile" v-model="item.img" :error="errors.img" :disabled="loading"/>
                 <div class="mt-3">
                     <label class="relative inline-flex items-center cursor-pointer mb-5">
@@ -37,6 +37,7 @@ import requests from "@/api/requests.js";
 import UiDatePicker from "@/components/Ui/UiDatePicker.vue";
 import UiTextArea from "@/components/Ui/UiTextArea.vue";
 import UiImageUpload from "@/components/Ui/UiImageUpload.vue";
+import dayjs from "dayjs";
 
 export default {
     name: "NewsItem",
@@ -65,7 +66,11 @@ export default {
         saveItem() {
             this.errors = [];
             this.loading = true;
-            requests.createNewsItem(this.item).then(res => {
+            let form = {
+                ...this.item,
+                publish_date: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+            };
+            requests.createNewsItem(form).then(res => {
                 this.loading = false;
                 this.$router.push({name: 'news_item', params: {id: res.id}});
             }).catch(err => {
@@ -76,7 +81,11 @@ export default {
         updateItem() {
             this.errors = [];
             this.loading = true;
-            requests.updateNewsItem(this.$route.params.id, this.item).then(res => {
+            let form = {
+                ...this.item,
+                publish_date: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+            };
+            requests.updateNewsItem(this.$route.params.id, form).then(res => {
                 this.loading = false;
             }).catch(err => {
                 this.loading = false;

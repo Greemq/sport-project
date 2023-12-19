@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CalendarResults;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CalendarResultsController extends Controller
 {

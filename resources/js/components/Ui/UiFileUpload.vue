@@ -1,10 +1,10 @@
 <template>
     <div class="mt-3">
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Выбрать
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Выбрать
             файл</label>
         <button type="button" @click="$refs.file_input.click()" :disabled="disabled"
-                :class="{'cursor-not-allowed':disabled}"
-                class="mt-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                :class="{'cursor-not-allowed':disabled,'dark:border-red-500 dark:text-red-500':error,'dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800':!error}"
+                class="mt-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
             Загрузить файл
         </button>
         <button type="button" :disabled="disabled||!file"
@@ -29,6 +29,9 @@ export default {
         },
         file: {
             default: ''
+        },
+        error: {
+            default: false
         }
 
     },
@@ -41,9 +44,6 @@ export default {
             window.open(window.location.origin + this.file, '_blank');
         }
     },
-    mounted() {
-        console.log(window.location.origin)
-    }
 
 };
 </script>

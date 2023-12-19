@@ -6,6 +6,7 @@ use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -21,14 +22,17 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        Log::error($request->all());
         $request->validate([
             'title' => 'required',
             'description' => 'required',
             'is_published' => 'required',
             'img' => 'required',
+            'publish_date' => 'required'
 
         ]);
-        $arr = array_merge($request->all(), ['publish_date' => Carbon::now()->toDateTimeString(),'user_id'=>Auth::id()]);
+
+        $arr = array_merge($request->all(), ['user_id' => Auth::id()]);
         $item = News::create($arr);
         return ['success' => true, 'id' => $item->id];
     }
