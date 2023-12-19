@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Athlete;
 use App\Models\CalendarResults;
 use App\Models\File;
 use App\Models\News;
@@ -69,5 +70,9 @@ class PublicController extends Controller
     public function getFiles(Request $request)
     {
         return File::filter($request->all())->get();
+    }
+
+    public function athleteList(Request $request){
+        return Athlete::filter($request)->paginate($request->paginate);
     }
 }

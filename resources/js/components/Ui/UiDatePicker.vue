@@ -2,7 +2,7 @@
     <div class="mt-3">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white "
                v-if="label" :class="{'text-red-800 dark:text-red-400':error}">{{ label }}</label>
-        <vue-date-picker v-model="modelValue" class="date_time" :year-picker="year_picker"
+        <vue-date-picker :modelValue="modelValue" class="date_time" :year-picker="year_picker"
                          @update:model-value="handleChange" cancel-text="Закрыть" select-text="Выбрать" locale="ru-Ru"/>
     </div>
 

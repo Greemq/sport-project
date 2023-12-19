@@ -52,5 +52,6 @@ Route::middleware([])->prefix('public')->group(function () {
     });
 
     Route::get('files',[\App\Http\Controllers\PublicController::class,'getFiles']);
+    Route::get('athlete',[\App\Http\Controllers\PublicController::class,'athleteList']);
 
 });
