@@ -84,7 +84,7 @@ export default {
             this.errors = [];
             let form = {
                 ...this.item,
-                date_time: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+                date_time: this.item.date_time ? dayjs(this.item.date_time).format('YYYY-MM-DD HH:MM:ss') : null
             };
             requests.updateCalendarResultsItem(this.$route.params.id, form).then(res => {
                 this.loading = false;
@@ -98,7 +98,7 @@ export default {
             this.errors = [];
             let form = {
                 ...this.item,
-                date_time: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+                date_time: this.item.date_time ? dayjs(this.item.date_time).format('YYYY-MM-DD HH:MM:ss') : null
             };
             requests.createCalendarResultsItem(form).then(res => {
                 this.$router.push({name: 'calendar_results_item', params: {id: res.id}});

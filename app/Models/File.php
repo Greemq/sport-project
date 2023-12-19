@@ -13,7 +13,7 @@ class File extends Model
     protected $fillable = [
         'title',
         'type',
-        'year',
+        'date_time',
         'file'
     ];
 

@@ -70,11 +70,20 @@ class PublicController extends Controller
 
     public function getFiles(Request $request)
     {
-        return File::filter($request->all())->get();
+        if ($request->type == 2) {
+            $list = File::filter($request->all())->orderBy('date_time', 'DESC')->get();
+
+            $list = $list->groupBy(function ($item) {
+                return \Carbon\Carbon::parse($item->date_time)->year;
+            });
+        } else
+            $list = File::filter($request->all())->orderBy('date_time', 'DESC')->get();
+        return $list;
     }
 
-    public function athleteList(Request $request){
-        Log::error($request->all());
+    public function athleteList(Request $request)
+    {
+
         return Athlete::filter($request)->paginate($request->paginate);
     }
 }

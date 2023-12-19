@@ -68,7 +68,7 @@ export default {
             this.loading = true;
             let form = {
                 ...this.item,
-                publish_date: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+                publish_date: this.item.publish_date ? dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss') : null
             };
             requests.createNewsItem(form).then(res => {
                 this.loading = false;
@@ -83,7 +83,7 @@ export default {
             this.loading = true;
             let form = {
                 ...this.item,
-                publish_date: dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss')
+                publish_date: this.item.publish_date ? dayjs(this.item.publish_date).format('YYYY-MM-DD HH:MM:ss') : null
             };
             requests.updateNewsItem(this.$route.params.id, form).then(res => {
                 this.loading = false;

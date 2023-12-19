@@ -4,9 +4,9 @@
             <div class="sm:w-full md:w-full lg:w-1/2">
                 <ui-input class="" v-model="item.title" :error="errors.title" :disabled="loading" label="Заголовок"
                           placeholder="Заголовок"/>
-                <ui-date-picker year_picker v-model="item.year" label="Год" :disabled="loading"/>
+                <ui-date-picker v-model="item.date_time" label="Год" :disabled="loading" :error="errors.date_time"/>
                 <ui-select :options="options" label="Тип документа" :disabled="loading" v-model="item.type"/>
-                <ui-file-upload :file="item.file" @fileUpload="setFile" :disabled="loading"/>
+                <ui-file-upload :file="item.file" @fileUpload="setFile" :disabled="loading" :error="errors.file"/>
 
             </div>
             <div class="mt-3 w-full flex justify-center">
@@ -27,6 +27,7 @@ import UiFileUpload from "@/components/Ui/UiFileUpload.vue";
 import requests from "@/api/requests.js";
 import UiDatePicker from "@/components/Ui/UiDatePicker.vue";
 import UiSelect from "@/components/Ui/UiSelect.vue";
+import dayjs from "dayjs";
 
 export default {
     name: "FileItem",
@@ -57,15 +58,26 @@ export default {
         },
         updateItem() {
             this.loading = true;
-            requests.updateFilesItem(this.$route.params.id, this.item).then(res => {
+            this.errors = [];
+            let form = {
+                ...this.item,
+                date_time: this.item.date_time ? dayjs(this.item.date_time).format('YYYY-MM-DD HH:MM:ss') : null
+            };
+            requests.updateFilesItem(this.$route.params.id, form).then(res => {
                 this.loading = false;
             }).catch(err => {
+                this.loading = false;
                 this.errors = err.response.data.errors;
             });
         },
         saveItem() {
             this.loading = true;
-            requests.createFilesItem(this.item).then(res => {
+            this.errors = [];
+            let form = {
+                ...this.item,
+                date_time: this.item.date_time ? dayjs(this.item.date_time).format('YYYY-MM-DD HH:MM:ss') : null
+            };
+            requests.createFilesItem(form).then(res => {
                 this.loading = false;
                 this.$rotuer.push({name: 'files_item', params: {id: res.id}});
             }).catch(err => {
@@ -95,7 +107,7 @@ export default {
                 title: null,
                 file: null,
                 type: null,
-                year: null
+                date_time: null
             }));
     }
 };

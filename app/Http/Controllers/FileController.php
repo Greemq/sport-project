@@ -18,7 +18,7 @@ class FileController extends Controller
             'file' => 'required',
             'title' => 'required',
             'type' => 'required',
-            'year' => 'required'
+            'date_time' => 'required'
         ]);
 
         $item = File::create($request->all());
@@ -31,7 +31,7 @@ class FileController extends Controller
             'file' => 'required',
             'title' => 'required',
             'type' => 'required',
-            'year' => 'required'
+            'date_time' => 'required'
         ]);
 
         File::find($id)->update($request->all());
