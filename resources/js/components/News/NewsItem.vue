@@ -4,7 +4,7 @@
             <div class="sm:w-full md:w-full lg:w-1/2">
                 <ui-input class="" v-model="item.title" :error="errors.title" :disabled="loading" label="Заголовок"
                           placeholder="Заголовок"/>
-                <ui-file-upload @fileUpload="setFile" v-model="item.img" :error="errors.img" :disabled="loading"/>
+                <ui-image-upload @fileUpload="setFile" v-model="item.img" :error="errors.img" :disabled="loading"/>
                 <div class="mt-3">
                     <label class="relative inline-flex items-center cursor-pointer mb-5">
                         <input type="checkbox" v-model="item.is_published" class="sr-only peer" :disabled="loading">
@@ -25,20 +25,21 @@
                     Сохранить
                 </button>
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
 import UiInput from "@/components/Ui/UiInput.vue";
-import UiFileUpload from "@/components/Ui/UiFileUpload.vue";
 import requests from "@/api/requests.js";
 import UiDatePicker from "@/components/Ui/UiDatePicker.vue";
 import UiTextArea from "@/components/Ui/UiTextArea.vue";
+import UiImageUpload from "@/components/Ui/UiImageUpload.vue";
 
 export default {
     name: "NewsItem",
-    components: {UiTextArea, UiDatePicker, UiFileUpload, UiInput},
+    components: {UiImageUpload, UiTextArea, UiDatePicker, UiInput},
     data() {
         return {
             item: null,

@@ -27,12 +27,20 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('', [\App\Http\Controllers\NewsController::class, 'store']);
         Route::post('/{id}/update', [\App\Http\Controllers\NewsController::class, 'update']);
     });
+    Route::prefix('calendar_results')->group(function () {
+        Route::get('', [\App\Http\Controllers\CalendarResultsController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\CalendarResultsController::class, 'item']);
+        Route::post('', [\App\Http\Controllers\CalendarResultsController::class, 'store']);
+        Route::post('/{id}/update', [\App\Http\Controllers\CalendarResultsController::class, 'update']);
+    });
+
 });
 
 Route::middleware([])->prefix('public')->group(function () {
     Route::get('news', [\App\Http\Controllers\PublicController::class, 'newsList']);
     Route::get('calendar-results', [\App\Http\Controllers\PublicController::class, 'getResults']);
     Route::post('register', [\App\Http\Controllers\PublicController::class, 'register']);
+    Route::post('login', [\App\Http\Controllers\PublicController::class, 'login']);
     Route::middleware(['auth:api'])->group(function () {
         Route::get('user-info', [\App\Http\Controllers\PublicController::class, 'userInfo']);
     });

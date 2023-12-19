@@ -27,6 +27,10 @@ class PublicController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id' => 2])) {
             $user = Auth::user();
             $token = $user->createToken('sport-token');
@@ -40,7 +44,7 @@ class PublicController extends Controller
             return response()->json([
                 'success' => false,
                 'data' => [
-                    'errors' => ['user' => ['Incorrect phone number or password']]
+                    'errors' => ['email' => 'error', 'password' => 'error']
                 ]], 401);
         }
     }

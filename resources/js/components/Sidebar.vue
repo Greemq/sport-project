@@ -26,7 +26,7 @@
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                               clip-rule="evenodd"></path>
                     </svg>
-                    <div class="font-medium w-full dark:text-white">
+                    <div class="font-medium w-full dark:text-white" v-if="$store.state.user.user">
                         <div>{{ $store.state.user.user.name }}</div>
                         <!--                        <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>-->
                     </div>
@@ -161,10 +161,10 @@ export default {
                     name: 'news',
                     label: 'новости'
                 },
-                // {
-                //     name: 'calendar_results',
-                //     label: 'Календарь и результаты'
-                // },
+                {
+                    name: 'calendar_results',
+                    label: 'Календарь и результаты'
+                },
                 // {
                 //     name: 'news',
                 //     label: 'Результаты соревнований'

@@ -11,13 +11,13 @@ const newsRoutes = [
         path: '/news',
         name: 'news_create',
         beforeEnter: requireAuth,
-        component:()=>import('../components/News/NewsItem.vue')
+        component: () => import('../components/News/NewsItem.vue')
     },
     {
         path: '/news/:id',
         name: 'news_item',
         beforeEnter: requireAuth,
-        component:()=>import('../components/News/NewsItem.vue')
+        component: () => import('../components/News/NewsItem.vue')
     },
 
 ];

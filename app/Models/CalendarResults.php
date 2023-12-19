@@ -6,11 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
+use function Symfony\Component\String\s;
 
 class CalendarResults extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'date_time',
+        'title',
+        'state',
+        'protocol',
+        'status',
+        'link',
+        'type'
+    ];
 
     /**
      * statuses
@@ -37,7 +47,12 @@ class CalendarResults extends Model
 
     public function scopeOrder($query, $order)
     {
-        Log::error($order);
-        return $query->orderBy('date_time','ASC');
+        return $query->orderBy('date_time', 'ASC');
     }
+
+    public function athlete()
+    {
+        return $this->belongsToMany(Athlete::class)->withTimestamps();
+    }
+
 }

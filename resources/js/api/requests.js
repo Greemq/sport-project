@@ -16,8 +16,23 @@ const requests = {
         });
     },
     updateNewsItem(id, data) {
-        return client.post('/api/news/' + id, data).then(res => res.data);
-    }
+        return client.post('/api/calendar_results/' + id, data).then(res => res.data);
+    },
+    getCalendarResultsList() {
+        return client.get('/api/calendar_results').then(res => res.data);
+    },
+    getCalendarResultsItem(id) {
+        return client.get('/api/calendar_results/' + id).then(res => res.data);
+    },
+    createCalendarResultsItem(data) {
+        return client.post('/api/calendar_results', data).then(res => {
+            return res.data;
+        });
+    },
+    updateCalendarResultsItem(id, data) {
+        return client.post('/api/calendar_results/' + id, data).then(res => res.data);
+    },
+
 };
 
 export default requests;
