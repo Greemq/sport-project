@@ -33,6 +33,12 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('', [\App\Http\Controllers\CalendarResultsController::class, 'store']);
         Route::post('/{id}/update', [\App\Http\Controllers\CalendarResultsController::class, 'update']);
     });
+    Route::prefix('files')->group(function () {
+        Route::get('', [\App\Http\Controllers\FileController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\FileController::class, 'item']);
+        Route::post('', [\App\Http\Controllers\FileController::class, 'store']);
+        Route::post('/{id}/update', [\App\Http\Controllers\FileController::class, 'update']);
+    });
 
 });
 

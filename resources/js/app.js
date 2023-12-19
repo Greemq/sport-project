@@ -8,6 +8,10 @@ import store from "./store/index.js";
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
 import dayjs from "dayjs";
+
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 // app.use(router)
 // app.use(store)
 // app.config.devtools = true;
@@ -24,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(store);
 app.use(router);
 app.component("infinite-loading", InfiniteLoading);
+app.component('VueDatePicker', VueDatePicker);
 app.config.globalProperties.$dayjs = dayjs
 
 app.mount('#app');

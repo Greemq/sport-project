@@ -165,6 +165,10 @@ export default {
                     name: 'calendar_results',
                     label: 'Календарь и результаты'
                 },
+                {
+                    name: 'files',
+                    label: 'Файлы'
+                },
                 // {
                 //     name: 'news',
                 //     label: 'Результаты соревнований'

@@ -12,6 +12,22 @@ const router = createRouter({
             name: 'login',
             component: () => import('../components/Login.vue'),
         },
+        {
+            path: '/files',
+            name: 'files',
+            component: () => import('../components/Files/FilesList.vue')
+        },
+        {
+            path: '/file',
+            name: 'files_create',
+            component: () => import('../components/Files/FileItem.vue')
+        },
+        {
+            path: '/file/:id',
+            name: 'files_item',
+            component: () => import('../components/Files/FileItem.vue')
+        },
+
 
     ]
 });

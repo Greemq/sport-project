@@ -2,7 +2,7 @@ import client from "../api/index.js";
 
 const requests = {
     fileUpload(data) {
-        return client.post('/api/file-upload', data,{headers: {'content-type': 'multipart/form-data'}}).then(res => res.data);
+        return client.post('/api/file-upload', data, {headers: {'content-type': 'multipart/form-data'}}).then(res => res.data);
     },
     getNewsList() {
         return client.get('/api/news').then(res => res.data);
@@ -16,7 +16,7 @@ const requests = {
         });
     },
     updateNewsItem(id, data) {
-        return client.post('/api/calendar_results/' + id, data).then(res => res.data);
+        return client.post('/api/news/' + id + '/update', data).then(res => res.data);
     },
     getCalendarResultsList() {
         return client.get('/api/calendar_results').then(res => res.data);
@@ -30,7 +30,21 @@ const requests = {
         });
     },
     updateCalendarResultsItem(id, data) {
-        return client.post('/api/calendar_results/' + id, data).then(res => res.data);
+        return client.post('/api/calendar_results/' + id + '/update', data).then(res => res.data);
+    },
+    getFilesList() {
+        return client.get('/api/files').then(res => res.data);
+    },
+    getFilesItem(id) {
+        return client.get('/api/files/' + id).then(res => res.data);
+    },
+    createFilesItem(data) {
+        return client.post('/api/files', data).then(res => {
+            return res.data;
+        });
+    },
+    updateFilesItem(id, data) {
+        return client.post('/api/files/' + id + '/update', data).then(res => res.data);
     },
 
 };

@@ -4,6 +4,7 @@
             <div class="sm:w-full md:w-full lg:w-1/2">
                 <ui-input class="" v-model="item.title" :error="errors.title" :disabled="loading" label="Заголовок"
                           placeholder="Заголовок"/>
+                <ui-date-picker label="label" :date="item.year"/>
                 <ui-image-upload @fileUpload="setFile" v-model="item.img" :error="errors.img" :disabled="loading"/>
                 <div class="mt-3">
                     <label class="relative inline-flex items-center cursor-pointer mb-5">
@@ -13,9 +14,9 @@
                         <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{{ toggleText }}</span>
                     </label>
                 </div>
-                <!--            <ui-date-picker/>-->
                 <ui-text-area v-model="item.description" placeholder="Описание" label="Описание"
                               :error="errors.description"/>
+
 
             </div>
             <div class="mt-3 w-full flex justify-center">
