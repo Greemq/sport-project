@@ -25,7 +25,7 @@ class PublicController extends Controller
 
         $user = User::create($request->all());
 
-        return ['success' => true, 'token' => $user->createToken('sport-client-token')->accessToken];
+        return ['success' => true, 'token' => $user->createToken('sport-client-token')->accessToken, 'user' => $user];
     }
 
     public function login(Request $request)
@@ -59,7 +59,7 @@ class PublicController extends Controller
 
     public function getResults(Request $request)
     {
-        return CalendarResults::filter($request->all())->order($request->all())->paginate($request->pagination);
+        return CalendarResults::filter($request->all())->order($request->all())->paginate($request->paginate);
 
     }
 
@@ -82,7 +82,12 @@ class PublicController extends Controller
 
     public function athleteList(Request $request)
     {
+        return Athlete::filter($request->all())->orderByDesc('id')->paginate($request->paginate);
+    }
 
-        return Athlete::filter($request)->paginate($request->paginate);
+    public function applicationAction(Request $request, $id)
+    {
+        Athlete::find($id)->update(['accepted' => $request->accepted]);
+        return ['success' => true];
     }
 }

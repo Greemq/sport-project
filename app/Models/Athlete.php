@@ -18,7 +18,8 @@ class Athlete extends Model
         'category',
         'file',
         'type',
-        'class'
+        'class',
+        'accepted'
 
     ];
 
@@ -29,12 +30,16 @@ class Athlete extends Model
 
     public function scopeFilter($query, $filters)
     {
-        Log::error($filters);
         if (isset($filters['search']))
             $query->where(function ($q) use ($filters) {
                 $q->where('fio', 'like', '%' . $filters['search'] . '%')->orWhere('personal_id', 'like', '%' . $filters['search'] . '%');
             });
-
+        if (isset($filters['accepted'])) {
+            if ($filters['accepted'] == false)
+                $query->whereNull('accepted');
+            else
+                $query->where('accepted', $filters['accepted']);
+        }
         return $query;
     }
 }

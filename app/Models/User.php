@@ -45,4 +45,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $appends = [
+        'role_name'
+    ];
+
+    /**
+     * Роли
+     * 1-админ
+     * 2-тренер
+     * 3-начальник
+     * 4-судья
+     */
+
+    public function getRoleNameAttribute()
+    {
+        $name = '';
+
+        switch ($this->role_id) {
+            case 1:
+                $name = "Администратор";
+                break;
+            case 2:
+                $name = "Тренер";
+                break;
+            case 3:
+                $name = "Начальник";
+                break;
+            case 4:
+                $name = "Судья";
+                break;
+            default:
+                break;
+
+        }
+        return $name;
+    }
 }
