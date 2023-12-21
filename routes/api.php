@@ -55,10 +55,12 @@ Route::middleware([])->prefix('public')->group(function () {
     Route::post('login', [\App\Http\Controllers\PublicController::class, 'login']);
     Route::middleware(['auth:api'])->group(function () {
         Route::get('user-info', [\App\Http\Controllers\PublicController::class, 'userInfo']);
-        Route::get('athlete',[\App\Http\Controllers\PublicController::class,'athleteList']);
-        Route::post('application-action/{id}',[\App\Http\Controllers\PublicController::class,'applicationAction']);
+        Route::get('athlete', [\App\Http\Controllers\PublicController::class, 'athleteList']);
+        Route::post('application-action/{id}', [\App\Http\Controllers\PublicController::class, 'applicationAction']);
+        Route::post('athlete', [\App\Http\Controllers\PublicController::class, 'createAthlete']);
+        Route::post('file_upload', [\App\Http\Controllers\MainController::class, 'uploadFile']);
     });
 
-    Route::get('files',[\App\Http\Controllers\PublicController::class,'getFiles']);
+    Route::get('files', [\App\Http\Controllers\PublicController::class, 'getFiles']);
 
 });

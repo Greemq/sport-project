@@ -90,4 +90,19 @@ class PublicController extends Controller
         Athlete::find($id)->update(['accepted' => $request->accepted]);
         return ['success' => true];
     }
+
+    public function createAthlete(Request $request)
+    {
+        $request->validate([
+            'fio' => 'required',
+            'location' => 'required',
+            'personal_id' => 'required|numeric',
+            'category' => 'required',
+            'file' => 'required',
+            'type' => 'required',
+            'class' => 'required',
+        ]);
+        Athlete::create($request->all());
+        return ['success' => true];
+    }
 }
