@@ -34,7 +34,7 @@ class PublicController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id' => 2])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $token = $user->createToken('sport-token');
             return response()->json([
