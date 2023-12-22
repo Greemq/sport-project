@@ -120,7 +120,7 @@ class PublicController extends Controller
     }
 
     public function applicationsList(Request $request)
-    {g
+    {
         return AthleteCalendarResult::filter($request->all())->with(['calendarResults', 'athlete'])->paginate($request->paginate);
     }
 
