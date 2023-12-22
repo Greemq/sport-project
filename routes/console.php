@@ -1,7 +1,9 @@
 <?php
 
+use App\Imports\AthleteImport;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Image\Image;
 
 /*
@@ -24,4 +26,12 @@ Artisan::command('test_file_path', function () {
     $this->info(public_path('storage'));
     Image::load(public_path('storage').'/news/'. $file_name)->width(100)->height(100)->save('/storage/news/_thumb' . $file_name);
 
+});
+
+Artisan::command('migrate_athlete', function() {
+    $file = public_path('storage') . "/Athletes.xlsx";
+
+    Excel::import(new AthleteImport, $file);
+
+    $this->info('done');
 });
