@@ -52,7 +52,7 @@ class CalendarResults extends Model
 
     public function athlete()
     {
-        return $this->belongsToMany(Athlete::class)->withTimestamps();
+        return $this->belongsToMany(Athlete::class)->withPivot('accepted');
     }
 
 }

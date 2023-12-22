@@ -23,9 +23,9 @@ class Athlete extends Model
 
     ];
 
-    public function calendarResults()
+    public function calendar()
     {
-        return $this->belongsToMany(CalendarResults::class)->withTimestamps();
+        return $this->belongsToMany(CalendarResults::class)->withPivot('accepted');
     }
 
     public function scopeFilter($query, $filters)
@@ -35,10 +35,9 @@ class Athlete extends Model
                 $q->where('fio', 'like', '%' . $filters['search'] . '%')->orWhere('personal_id', 'like', '%' . $filters['search'] . '%');
             });
         if (isset($filters['accepted'])) {
-            if ($filters['accepted'] == false)
-                $query->whereNull('accepted');
-            else
-                $query->where('accepted', $filters['accepted']);
+            $query->whereHas('calendar', function ($q) use ($filters) {
+                $q->wherePivot('accepted','=', $filters['accepted']);
+            });
         }
         return $query;
     }

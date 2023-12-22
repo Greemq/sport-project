@@ -59,6 +59,9 @@ Route::middleware([])->prefix('public')->group(function () {
         Route::post('application-action/{id}', [\App\Http\Controllers\PublicController::class, 'applicationAction']);
         Route::post('athlete', [\App\Http\Controllers\PublicController::class, 'createAthlete']);
         Route::post('file_upload', [\App\Http\Controllers\MainController::class, 'uploadFile']);
+        Route::post('application-create', [\App\Http\Controllers\PublicController::class, 'applicationCreate']);
+        Route::get('application-calendar-list', [\App\Http\Controllers\PublicController::class, 'applicationCalendarList']);
+        Route::get('application-list', [\App\Http\Controllers\PublicController::class, 'applicationsList']);
     });
 
     Route::get('files', [\App\Http\Controllers\PublicController::class, 'getFiles']);

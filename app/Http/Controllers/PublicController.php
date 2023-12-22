@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Athlete;
+use App\Models\AthleteCalendarResult;
 use App\Models\CalendarResults;
 use App\Models\File;
 use App\Models\News;
@@ -87,8 +88,40 @@ class PublicController extends Controller
 
     public function applicationAction(Request $request, $id)
     {
-        Athlete::find($id)->update(['accepted' => $request->accepted]);
+        AthleteCalendarResult::find($id)->update(['accepted' => $request->accepted]);
         return ['success' => true];
+    }
+
+    public function applicationCreate(Request $request)
+    {
+        $request->validate([
+            'calendar_id' => 'required',
+            'personal_id' => 'required'
+        ]);
+
+        $athlete = Athlete::where('personal_id', $request->personal_id)->first();
+        if (isset($athlete)) {
+            CalendarResults::find($request->calendar_id)->athlete()->attach($athlete->id);
+            return ['success' => true];
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'errors' => ['personal_id' => 'error']
+                ], 401
+            );
+        }
+
+    }
+
+    public function applicationCalendarList()
+    {
+        return CalendarResults::where('status', 1)->get();
+    }
+
+    public function applicationsList(Request $request)
+    {g
+        return AthleteCalendarResult::filter($request->all())->with(['calendarResults', 'athlete'])->paginate($request->paginate);
     }
 
     public function createAthlete(Request $request)
