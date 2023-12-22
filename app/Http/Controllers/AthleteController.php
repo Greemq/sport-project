@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Athlete;
+use App\Models\AthleteCalendarResult;
 use Illuminate\Http\Request;
 
 class AthleteController extends Controller
@@ -45,6 +46,11 @@ class AthleteController extends Controller
         ]);
         Athlete::find($id)->update($request->all());
         return ['success' => true];
+    }
+
+    public function applicationsList(Request $request)
+    {
+        return AthleteCalendarResult::with(['calendarResults', 'athlete'])->paginate(20);
     }
 
 

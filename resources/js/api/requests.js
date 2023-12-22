@@ -60,6 +60,9 @@ const requests = {
     updateAthleteItem(id, data) {
         return client.post('/api/athlete/' + id + '/update', data).then(res => res.data);
     },
+    applicationsList(data) {
+        return client.get('/api/applications', {params: data}).then(res => res.data);
+    }
 
 
 };

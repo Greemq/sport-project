@@ -19,6 +19,12 @@ const athletesRoutes = [
         beforeEnter: requireAuth,
         component: () => import('../components/Athlete/AthleteItem.vue')
     },
+    {
+        path: '/applications',
+        name: 'applications',
+        beforeEnter: requireAuth,
+        component: () => import('../components/Applications/ApplicationsList.vue')
+    }
 
 ];
 

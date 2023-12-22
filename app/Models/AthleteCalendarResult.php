@@ -12,7 +12,8 @@ class AthleteCalendarResult extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'accepted'
+        'accepted',
+        'place'
     ];
 
     public function athlete()
@@ -25,9 +26,10 @@ class AthleteCalendarResult extends Model
         return $this->belongsTo(CalendarResults::class);
     }
 
-    public function scopeFilter($query,$filter){
+    public function scopeFilter($query, $filter)
+    {
         if (isset($filter['accepted']))
-            $query->where('accepted',$filter['accepted']);
+            $query->where('accepted', $filter['accepted'] == true ? 1 : null);
         else
             $query->whereNull('accepted');
         return $query;

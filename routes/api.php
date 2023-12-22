@@ -45,6 +45,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('', [\App\Http\Controllers\AthleteController::class, 'store']);
         Route::post('/{id}/update', [\App\Http\Controllers\AthleteController::class, 'update']);
     });
+    Route::get('/applications', [\App\Http\Controllers\AthleteController::class, 'applicationsList']);
 
 });
 
@@ -62,6 +63,7 @@ Route::middleware([])->prefix('public')->group(function () {
         Route::post('application-create', [\App\Http\Controllers\PublicController::class, 'applicationCreate']);
         Route::get('application-calendar-list', [\App\Http\Controllers\PublicController::class, 'applicationCalendarList']);
         Route::get('application-list', [\App\Http\Controllers\PublicController::class, 'applicationsList']);
+        Route::post('application-place', [\App\Http\Controllers\PublicController::class, 'setPlace']);
     });
 
     Route::get('files', [\App\Http\Controllers\PublicController::class, 'getFiles']);

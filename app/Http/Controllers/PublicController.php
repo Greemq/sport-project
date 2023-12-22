@@ -94,20 +94,22 @@ class PublicController extends Controller
 
     public function applicationCreate(Request $request)
     {
+
         $request->validate([
             'calendar_id' => 'required',
-            'personal_id' => 'required'
+            'id' => 'required'
         ]);
 
-        $athlete = Athlete::where('personal_id', $request->personal_id)->first();
-        if (isset($athlete)) {
+        $athlete = Athlete::find($request->id);
+
+        if (isset($athlete) && !AthleteCalendarResult::where('athlete_id', $request->id)->where('calendar_results_id', $request->calendar_id)->exists()) {
             CalendarResults::find($request->calendar_id)->athlete()->attach($athlete->id);
             return ['success' => true];
         } else {
             return response()->json(
                 [
                     'success' => false,
-                    'errors' => ['personal_id' => 'error']
+                    'errors' => ['calendar_id' => 'error']
                 ], 401
             );
         }
@@ -137,5 +139,17 @@ class PublicController extends Controller
         ]);
         Athlete::create($request->all());
         return ['success' => true];
+    }
+
+    public function setPlace(Request $request)
+    {
+        $request->validate([
+            'place' => 'required',
+            'id' => 'required',
+
+        ]);
+        AthleteCalendarResult::find($request->id)->update(['place' => $request->place]);
+        return ['success' => true];
+
     }
 }

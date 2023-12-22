@@ -175,8 +175,8 @@ export default {
                 },
 
                 {
-                    name: 'news',
-                    label: 'Предстоящие события'
+                    name: 'applications',
+                    label: 'Заявки'
                 },
                 {
                     name: 'news',
