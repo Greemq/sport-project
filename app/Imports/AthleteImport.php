@@ -26,7 +26,7 @@ class AthleteImport implements ToCollection
                     "file" => "–",
                     "type" => "1",
                     "class" => "–",
-                    "accepted" => true,
+                    // "accepted" => true,
                 ]);
             }
             
