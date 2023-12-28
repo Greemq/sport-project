@@ -27,6 +27,8 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('', [\App\Http\Controllers\NewsController::class, 'store']);
         Route::post('/{id}/update', [\App\Http\Controllers\NewsController::class, 'update']);
     });
+
+
     Route::prefix('calendar_results')->group(function () {
         Route::get('', [\App\Http\Controllers\CalendarResultsController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\CalendarResultsController::class, 'item']);
@@ -47,6 +49,15 @@ Route::middleware(['auth:api'])->group(function () {
     });
     Route::get('/applications', [\App\Http\Controllers\AthleteController::class, 'applicationsList']);
 
+    Route::prefix('photo_gallery')->group(function () {
+        Route::post('', [\App\Http\Controllers\PhotoGalleryController::class, 'store']);
+        Route::post('/{id}', [\App\Http\Controllers\PhotoGalleryController::class, 'destroy']);
+    });
+
+    Route::prefix('video_gallery')->group(function () {
+        Route::post('', [\App\Http\Controllers\VideoController::class, 'store']);
+        Route::post('/{id}', [\App\Http\Controllers\VideoController::class, 'destroy']);
+    });
 });
 
 Route::middleware([])->prefix('public')->group(function () {
@@ -67,5 +78,5 @@ Route::middleware([])->prefix('public')->group(function () {
     });
 
     Route::get('files', [\App\Http\Controllers\PublicController::class, 'getFiles']);
-
+    Route::get('photo_gallery', [\App\Http\Controllers\PhotoGalleryController::class, 'index']);
 });
