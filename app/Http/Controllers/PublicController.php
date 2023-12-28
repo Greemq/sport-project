@@ -60,7 +60,7 @@ class PublicController extends Controller
 
     public function getResults(Request $request)
     {
-        return CalendarResults::filter($request->all())->order($request->all())->paginate($request->paginate);
+        return CalendarResults::filter($request->all())->order($request->order)->paginate($request->paginate);
 
     }
 

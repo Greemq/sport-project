@@ -47,7 +47,9 @@ class CalendarResults extends Model
 
     public function scopeOrder($query, $order)
     {
-        return $query->orderBy('date_time', 'DESC');
+        if (isset($order['date_time']))
+            $query->orderBy('date_time', $order['date_time']);
+        return $query;
     }
 
     public function athlete()
