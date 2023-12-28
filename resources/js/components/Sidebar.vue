@@ -183,7 +183,7 @@ export default {
                     label: 'Топ Видео'
                 },
                 {
-                    name: 'news',
+                    name: 'photo_gallery',
                     label: 'Фотогалерея'
                 },
                 {

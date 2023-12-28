@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import newsRoutes from "@/router/newsRoutes.js";
 import calendarResultsRoutes from "@/router/calendarResultsRoutes.js";
 import athletesRoutes from "@/router/athlete.js";
+import PhotoGalleryRoutes from "@/router/photo_gallery.js";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -9,6 +10,7 @@ const router = createRouter({
         ...newsRoutes,
         ...calendarResultsRoutes,
         ...athletesRoutes,
+        ...PhotoGalleryRoutes,
         {
             path: '/login',
             name: 'login',
