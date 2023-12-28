@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PhotoGalleryResource;
 use App\Models\PhotoGallery;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class PhotoGalleryController extends Controller
 {
     public function index()
     {
-        return response()->json(PhotoGallery::all());
+        return PhotoGalleryResource::collection(PhotoGallery::all());
     }
 
     public function store(Request $request)
