@@ -55,7 +55,7 @@ class PublicController extends Controller
 
     public function newsList(Request $request)
     {
-        return News::paginate(10);
+        return News::paginate(3);
     }
 
     public function getResults(Request $request)

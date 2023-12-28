@@ -41,6 +41,9 @@ class CalendarResults extends Model
         if (isset($filters['type'])) {
             $query->where('type', $filters['type']);
         }
+        if (isset($filters['id'])) {
+            $query->where('id', $filters['id']);
+        }
 
         return $query;
     }
