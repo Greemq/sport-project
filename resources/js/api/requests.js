@@ -62,7 +62,32 @@ const requests = {
     },
     applicationsList(data) {
         return client.get('/api/applications', {params: data}).then(res => res.data);
-    }
+    },
+
+    getGalleryList(data) {
+        return client.get('/api/photo_gallery', {params: data}).then(res => res.data);
+    },
+    getGalleryItem(id) {
+        return client.get('/api/photo_gallery/' + id).then(res => res.data);
+    },
+    createGalleryItem(data) {
+        return client.post('/api/photo_gallery', data).then(res => res.data);
+    },
+    updateGalleryItem(id, data) {
+        return client.post('/api/photo_gallery/' + id + '/update', data).then(res => res.data);
+    },
+    getVideoGalleryList(data) {
+        return client.get('/api/video_gallery', {params: data}).then(res => res.data);
+    },
+    getVideoGalleryItem(id) {
+        return client.get('/api/video_gallery/' + id).then(res => res.data);
+    },
+    createVideoGalleryItem(data) {
+        return client.post('/api/video_gallery', data).then(res => res.data);
+    },
+    updateVideoGalleryItem(id, data) {
+        return client.post('/api/video_gallery/' + id+'/update', data).then(res => res.data);
+    },
 
 
 };

@@ -7,21 +7,42 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(VideoGallery::all());
+        return VideoGallery::paginate(20);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'link' => 'required',
-        ],[
-            'link.*' => 'Обязательное поле'
+            'link' => 'required|url',
+            'img' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'date' => 'required'
         ]);
 
-        $video = VideoGallery::create($request->validated());
-        return response()->json(asset($video->link));
+        $video = VideoGallery::create($request->all());
+        return ['success' => true, 'id' => $video->id];
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'link' => 'required|url',
+            'img' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'date' => 'required'
+        ]);
+
+        VideoGallery::find($id)->update($request->all());
+        return ['success' => true];
+    }
+
+    public function item($id)
+    {
+        return VideoGallery::find($id);
     }
 
     public function destroy($id)

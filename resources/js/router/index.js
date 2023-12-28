@@ -3,6 +3,7 @@ import newsRoutes from "@/router/newsRoutes.js";
 import calendarResultsRoutes from "@/router/calendarResultsRoutes.js";
 import athletesRoutes from "@/router/athlete.js";
 import PhotoGalleryRoutes from "@/router/photo_gallery.js";
+import videoGalleryRoutes from "@/router/video_gallery.js";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,6 +12,7 @@ const router = createRouter({
         ...calendarResultsRoutes,
         ...athletesRoutes,
         ...PhotoGalleryRoutes,
+        ...videoGalleryRoutes,
         {
             path: '/login',
             name: 'login',

@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class VideoGallery extends Model
 {
-    protected $table = 'video_gallery';
     protected $fillable = [
         'link',
+        'img',
+        'title',
+        'description',
+        'date'
     ];
+
+    protected $appends = ['img_url'];
+
+    public function getImgUrlAttribute()
+    {
+        return url('/') . $this->img;
+    }
 }

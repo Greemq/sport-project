@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PhotoGallery extends Model
 {
+    protected $table = 'photogallery';
 
     protected $fillable = [
-        'img',
+        'path',
     ];
+
+    protected $appends = ['img_url'];
+
+    public function getImgUrlAttribute()
+    {
+        return url('/') . $this->path;
+    }
 }

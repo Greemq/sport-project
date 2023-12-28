@@ -2,7 +2,7 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div class=" flex justify-end">
-                <button type="button" @click="$router.push({name:'news_create'})"
+                <button type="button" @click="$router.push({name:'video_gallery_item_create'})"
                         class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Добавить
                 </button>
@@ -19,10 +19,7 @@
                         </th>
 
                         <th scope="col" class="px-6 py-3">
-                            Дата публикации
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Опубликован
+                            Дата
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Действия
@@ -35,27 +32,20 @@
                         v-for="item in list" :key="'list_item_'+item.id">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-start">
-                                <img class="w-18 h-12 rounded" :src="item.img">
+                                <img class="w-18 h-20 rounded" :src="item.img">
                             </div>
                         </th>
                         <td class="px-6 py-4">
                             {{ item.title }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $dayjs(item.created_at).format('DD:M:YYYY HH:MM:ss') }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full me-2"
-                                     :class="{'bg-red-500':!item.is_published,'bg-green-500':item.is_published}"></div>
-                                {{ item.is_published ? 'Опубликован' : 'Не опубликован' }}
-                            </div>
+                            {{ $dayjs(item.date).format('DD:M:YYYY') }}
                         </td>
                         <td class="px-6 py-4 w-10">
                             <div class="flex items-center justify-end">
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white cursor-pointer h-full"
                                      aria-hidden="true"
-                                     @click="$router.push({name:'news_item',params:{id:item.id}})"
+                                     @click="$router.push({name:'video_gallery_item',params:{id:item.id}})"
                                      xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                                     <path
                                         d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
@@ -96,33 +86,31 @@
 
 <script>
 import requests from "@/api/requests.js";
-import InfiniteLoading from "v3-infinite-loading";
 
 export default {
-    name: "NewsList",
-    components: {InfiniteLoading},
+    name: "VideoGalleryList",
     data() {
         return {
             list: [],
-            loading: false,
+            last_page: null,
             page: 0,
-            last_page: null
+            loading: false
         };
     },
     methods: {
-        handleLoad() {
-            if (!this.loading && this.page !== this.last_page)
-                this.getList();
-        },
         getList() {
             this.loading = true;
             this.page += 1;
-            requests.getNewsList({page: this.page}).then(res => {
+            requests.getVideoGalleryList({page: this.page}).then(res => {
                 this.list = this.list.concat(res.data);
                 this.last_page = res.last_page;
                 this.loading = false;
             });
-        }
+        },
+        handleLoad() {
+            if (!this.loading && this.page !== this.last_page)
+                this.getList();
+        },
     }
 };
 </script>

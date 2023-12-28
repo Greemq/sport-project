@@ -8,22 +8,37 @@ use Illuminate\Http\Request;
 
 class PhotoGalleryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return PhotoGalleryResource::collection(PhotoGallery::all());
+        return PhotoGallery::paginate(20);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
-        ],[
-            'img.*' => 'Фото должно быть формата jpeg, png, jpg, gif, svg и не более 6 МБ'
-        ]);
-        $imageName = time() . '.' . $request->img->extension();
-        $request->img->move(public_path('storage/photo_gallery'), $imageName);
-        $photo = PhotoGallery::create(['path' => 'storage/photo_gallery/' . $imageName]);
-        return response()->json(asset($photo->path));
+            'path' => 'required',
+        ],);
+
+        $photo = PhotoGallery::create(['path' => $request->path]);
+        return ['success' => true, 'id' => $photo->id];
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
+        ],
+            [
+                'path.*' => 'Фото должно быть формата jpeg, png, jpg, gif, svg и не более 6 МБ'
+            ]);
+
+        $photo = PhotoGallery::find($id)->update(['path' => $request->img]);
+        return ['success' => true, 'id' => $photo->id];
+    }
+
+    public function item($id)
+    {
+        return PhotoGallery::find($id);
     }
 
     public function destroy($id)

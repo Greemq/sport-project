@@ -7,7 +7,9 @@ use App\Models\AthleteCalendarResult;
 use App\Models\CalendarResults;
 use App\Models\File;
 use App\Models\News;
+use App\Models\PhotoGallery;
 use App\Models\User;
+use App\Models\VideoGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -161,5 +163,15 @@ class PublicController extends Controller
         AthleteCalendarResult::find($request->id)->update(['place' => $request->place]);
         return ['success' => true];
 
+    }
+
+    public function photoGallery()
+    {
+        return array_chunk(PhotoGallery::get()->toArray(), 5);
+    }
+
+    public function videoGallery()
+    {
+        return VideoGallery::limit(4)->get();
     }
 }

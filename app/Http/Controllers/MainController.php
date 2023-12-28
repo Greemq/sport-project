@@ -21,7 +21,7 @@ class MainController extends Controller
             $name = '/storage/news/' . $full_file;
             Image::load(public_path('storage') . '/' . $request->type . '/' . $full_file)->save(public_path('storage') . '/' . $request->type . '/' . $full_file);
 //            self::resizeImage($full_file, 'news', 'small');
-        } else if (in_array($request->type, ['calendar-results', 'files', 'athlete'])) {
+        } else if (in_array($request->type, ['calendar-results', 'files', 'athlete', 'gallery', 'video_gallery'])) {
             $file->storeAs('public/' . $request->type . '/', $full_file);
             $name = '/storage/' . $request->type . '/' . $full_file;
 //            self::resizeImage($full_file, 'news', 'small');

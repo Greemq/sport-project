@@ -179,7 +179,7 @@ export default {
                     label: 'Заявки'
                 },
                 {
-                    name: 'news',
+                    name: 'video_gallery',
                     label: 'Топ Видео'
                 },
                 {
