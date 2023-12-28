@@ -1,6 +1,9 @@
 import client from "../api/index.js";
 
 const requests = {
+    changeTheme(data) {
+        return client.post('/api/change_theme', data).then(res => res.data);
+    },
     fileUpload(data) {
         return client.post('/api/file-upload', data, {headers: {'content-type': 'multipart/form-data'}}).then(res => res.data);
     },
@@ -86,7 +89,7 @@ const requests = {
         return client.post('/api/video_gallery', data).then(res => res.data);
     },
     updateVideoGalleryItem(id, data) {
-        return client.post('/api/video_gallery/' + id+'/update', data).then(res => res.data);
+        return client.post('/api/video_gallery/' + id + '/update', data).then(res => res.data);
     },
 
 

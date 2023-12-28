@@ -56,6 +56,20 @@
                             <span class="ms-3">{{ route.label }}</span>
                         </router-link>
                     </li>
+                    <div style="margin-top: 40px">
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white "> Тема сайта</label>
+                        <div>
+                            <label class="relative inline-flex items-center cursor-pointer mb-5">
+                                <input type="checkbox" v-model="dark_theme" class="sr-only peer" :disabled="loading"
+                                       @change="changeTheme()">
+                                <div
+                                    class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{{
+                                        dark_theme ? 'Траурная версия' : 'Цветная версия'
+                                    }}</span>
+                            </label>
+                        </div>
+                    </div>
                     <!--                    <li>-->
                     <!--                        <a href="#"-->
                     <!--                           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">-->
@@ -151,6 +165,7 @@
 
 <script>
 import authApi from "@/api/AuthApi.js";
+import requests from "@/api/requests.js";
 
 export default {
     name: "Sidebar",
@@ -201,7 +216,9 @@ export default {
 
 
             ],
-            userName: null
+            userName: null,
+            dark_theme: false,
+            loading: false
         };
     },
     watch: {
@@ -217,6 +234,13 @@ export default {
     methods: {
         logout() {
             authApi.logout();
+        },
+        changeTheme() {
+            this.loading = true;
+            requests.changeTheme().then(res => {
+                console.log('res');
+                this.loading = false;
+            });
         }
     },
 };

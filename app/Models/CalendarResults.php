@@ -44,6 +44,10 @@ class CalendarResults extends Model
         if (isset($filters['id'])) {
             $query->where('id', $filters['id']);
         }
+        if (isset($filters['search']))
+            $query->where(function ($q) use ($filters) {
+                $q->where('id', 'like', '%' . $filters['search'] . '%')->orWhere('title', 'like', '%' . $filters['search'] . '%');
+            });
 
         return $query;
     }

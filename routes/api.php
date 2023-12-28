@@ -64,6 +64,8 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/{id}', [\App\Http\Controllers\VideoController::class, 'destroy']);
     });
 
+    Route::post('change_theme', [\App\Http\Controllers\PublicController::class, 'changeTheme']);
+
 });
 
 Route::middleware([])->prefix('public')->group(function () {
@@ -89,4 +91,5 @@ Route::middleware([])->prefix('public')->group(function () {
     Route::get('files', [\App\Http\Controllers\PublicController::class, 'getFiles']);
     Route::get('gallery', [\App\Http\Controllers\PublicController::class, 'photoGallery']);
     Route::get('video-gallery', [\App\Http\Controllers\PublicController::class, 'videoGallery']);
+    Route::get('color-scheme', [\App\Http\Controllers\PublicController::class, 'getColorScheme']);
 });

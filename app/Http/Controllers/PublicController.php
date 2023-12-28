@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Athlete;
 use App\Models\AthleteCalendarResult;
 use App\Models\CalendarResults;
+use App\Models\ColorScheme;
 use App\Models\File;
 use App\Models\News;
 use App\Models\PhotoGallery;
@@ -173,5 +174,19 @@ class PublicController extends Controller
     public function videoGallery()
     {
         return VideoGallery::limit(4)->get();
+    }
+
+    public function changeTheme()
+    {
+        $scheme = ColorScheme::find(1);
+        $scheme->update(['theme' => !$scheme->theme]);
+
+        return ['success' => true];
+    }
+
+
+    public function getColorScheme()
+    {
+        return ColorScheme::find(1)->theme == 1 ? 'light' : 'dark';
     }
 }
