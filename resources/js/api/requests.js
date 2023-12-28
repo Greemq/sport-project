@@ -4,6 +4,9 @@ const requests = {
     changeTheme(data) {
         return client.post('/api/change_theme', data).then(res => res.data);
     },
+    getScheme() {
+        return client.get('/api/get_theme').then(res => res.data);
+    },
     fileUpload(data) {
         return client.post('/api/file-upload', data, {headers: {'content-type': 'multipart/form-data'}}).then(res => res.data);
     },

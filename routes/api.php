@@ -65,6 +65,7 @@ Route::middleware(['auth:api'])->group(function () {
     });
 
     Route::post('change_theme', [\App\Http\Controllers\PublicController::class, 'changeTheme']);
+    Route::get('get_theme', [\App\Http\Controllers\PublicController::class, 'getColorScheme']);
 
 });
 
