@@ -19,10 +19,22 @@ class News extends Model
         'publish_date',
     ];
 
-    protected $appends = ['thumb_image'];
+    protected $appends = ['thumb_image', 'img_url'];
 
     public function getThumbImageAttribute()
     {
-        return 'storage/news/thumb_' . basename($this->img);
+        return url('/') . 'storage/news/thumb_' . basename($this->img);
+    }
+
+    public function getImgUrlAttribute()
+    {
+        return url('/') . $this->img;
+    }
+
+    public function scopeFilter($query, $filter)
+    {
+        if (isset($filter['is_published']))
+            $query->where('is_published', $filter['is_published']);
+        return $query;
     }
 }

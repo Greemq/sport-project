@@ -55,7 +55,17 @@ class PublicController extends Controller
 
     public function newsList(Request $request)
     {
-        return News::paginate(10);
+        return News::filter(['is_published' => true])->orderByDesc('publish_date')->limit(3)->get();
+    }
+
+    public function newsItem($id)
+    {
+        return News::filter(['is_published' => true])->find($id);
+    }
+
+    public function newsOther(Request $request)
+    {
+        return News::filter(['is_published' => true])->where('id', '!=', $request->news_id)->inRandomOrder()->limit(3)->get();
     }
 
     public function getResults(Request $request)
