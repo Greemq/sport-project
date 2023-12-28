@@ -64,6 +64,13 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/{id}', [\App\Http\Controllers\VideoController::class, 'destroy']);
     });
 
+    Route::prefix('users')->group(function () {
+        Route::get('', [\App\Http\Controllers\UserController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\UserController::class, 'item']);
+        Route::post('', [\App\Http\Controllers\UserController::class, 'store']);
+        Route::post('/{id}/update', [\App\Http\Controllers\UserController::class, 'update']);
+    });
+
     Route::post('change_theme', [\App\Http\Controllers\PublicController::class, 'changeTheme']);
     Route::get('get_theme', [\App\Http\Controllers\PublicController::class, 'getColorScheme']);
 

@@ -182,6 +182,10 @@ export default {
                     label: 'Календарь и результаты'
                 },
                 {
+                    name: 'users',
+                    label: 'Пользователи'
+                },
+                {
                     name: 'athlete',
                     label: 'Спортсмены'
                 },
